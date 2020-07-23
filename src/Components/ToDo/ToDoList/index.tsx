@@ -58,6 +58,9 @@ const ToDoList: React.FC<any> = () => {
               <ListItemText className={clsx(!todo.active && classes.activeTodo)}>
                 {todo.title}
               </ListItemText>
+              <ListItemText>
+                {todo.description}
+              </ListItemText>
               <ListItemSecondaryAction>
                 <IconButton
                   onClick={() => dispatch(requestToRemove(todo.id))}

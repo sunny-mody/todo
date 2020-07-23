@@ -3,7 +3,8 @@ import * as constants from './constants';
 export interface Todo {
     id: string
     active: boolean,
-    title: string
+    title: string,
+    description: string,
 }
 
 export interface State {
