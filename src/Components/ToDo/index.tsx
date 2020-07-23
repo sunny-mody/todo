@@ -11,16 +11,16 @@ import ToDoList from './ToDoList';
 // import ResetButton from './resetButton';
 
 const ToDo = () => (
-    <Provider store={store}>
-        <Container maxWidth="sm">
-            <Typography variant="h5">
-                Todos With Redux-Saga
+  <Provider store={store}>
+    <Container maxWidth="sm">
+      <Typography style={{ padding: '20px' }} variant="h5">
+        Todos With Redux-Saga
             </Typography>
-            <AddToDo />
-            <ToDoList />
-            {/* <ResetButton /> */}
-        </Container>
-    </Provider>
+      <AddToDo />
+      <ToDoList />
+      {/* <ResetButton /> */}
+    </Container>
+  </Provider>
 )
 
 export default ToDo;
