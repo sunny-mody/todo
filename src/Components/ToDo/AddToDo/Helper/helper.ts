@@ -1,7 +1,8 @@
+import uniqueId from 'lodash/uniqueId';
 import { Todo } from '../../SagaStore/types';
 
 export const createTodo = (prefix: string, title: string): Todo => ({
-  id: Math.random().toString(),
+  id: uniqueId(prefix),
   active: true,
   title
 })
