@@ -13,7 +13,7 @@ import ToDoList from './ToDoList';
 const ToDo = () => (
   <Provider store={store}>
     <Container maxWidth="md">
-      <Typography style={{ padding: '20px' }} variant="h5">
+      <Typography style={{ padding: '20px', color: 'blue', margin: '20px' }} variant="h5">
         Todos With Redux-Saga
             </Typography>
       <AddToDo />
