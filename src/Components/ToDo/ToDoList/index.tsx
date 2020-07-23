@@ -10,7 +10,8 @@ import {
   ListItemIcon,
   ListItemSecondaryAction,
   ListItemText,
-  Checkbox
+  Checkbox,
+  Divider,
 } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import MaterialUIList from '@material-ui/core/List';
@@ -39,34 +40,37 @@ const ToDoList: React.FC<any> = () => {
     <MaterialUIList disablePadding>
       {todos.map(todo => {
         return (
-          <ListItem
-            key={todo.id}
-            dense
-            button
-            onClick={() => dispatch(requestToToggle(todo.id))}
-          >
-            <ListItemIcon>
-              <Checkbox
-                edge="start"
-                checked={!todo.active}
-                tabIndex={-1}
-                disableRipple
-              />
-            </ListItemIcon>
-            <ListItemText className={clsx(!todo.active && classes.activeTodo)}>
-              {todo.title}
-            </ListItemText>
-            <ListItemSecondaryAction>
-              <IconButton
-                onClick={() => dispatch(requestToRemove(todo.id))}
-                edge="end"
-                color="primary"
-                size="small"
-              >
-                <DeleteIcon />
-              </IconButton>
-            </ListItemSecondaryAction>
-          </ListItem>
+          <React.Fragment>
+            <ListItem
+              key={todo.id}
+              dense
+              button
+              onClick={() => dispatch(requestToToggle(todo.id))}
+            >
+              <ListItemIcon>
+                <Checkbox
+                  edge="start"
+                  checked={!todo.active}
+                  tabIndex={-1}
+                  disableRipple
+                />
+              </ListItemIcon>
+              <ListItemText className={clsx(!todo.active && classes.activeTodo)}>
+                {todo.title}
+              </ListItemText>
+              <ListItemSecondaryAction>
+                <IconButton
+                  onClick={() => dispatch(requestToRemove(todo.id))}
+                  edge="end"
+                  color="primary"
+                  size="small"
+                >
+                  <DeleteIcon />
+                </IconButton>
+              </ListItemSecondaryAction>
+            </ListItem>
+            <Divider />
+          </React.Fragment>
         )
       })}
     </MaterialUIList>
