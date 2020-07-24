@@ -4,7 +4,7 @@ import { useStyles } from './styles';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 
-import AddToDo from './AddToDo';
+import AddEditToDo from './AddToDo';
 import ToDoList from './ToDoList';
 // import ResetButton from './resetButton';
 
@@ -15,7 +15,7 @@ const ToDo = () => {
       <Typography className={classes.root} variant="h5">
         Todos With Redux-Saga
         </Typography>
-      <AddToDo />
+      <AddEditToDo />
       <ToDoList />
       {/* <ResetButton /> */}
     </Container>

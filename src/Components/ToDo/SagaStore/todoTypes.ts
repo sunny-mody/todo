@@ -17,6 +17,16 @@ export interface RequestToAdd {
   todo: Todo
 }
 
+export interface RequestToEdit {
+  type: constants.REQUEST_TO_EDIT
+  id: string
+}
+
+export interface RequestCommitEdit {
+  type: constants.REQUEST_COMMIT_EDIT
+  todo: Todo
+}
+
 export interface RequestToRemove {
   type: constants.REQUEST_TO_REMOVE
   id: string
@@ -31,4 +41,4 @@ export interface RequestToReset {
   type: constants.REQUEST_TO_RESET
 }
 
-export type Actions = RequestToAdd | RequestToRemove | RequestToToggle | RequestToReset
+export type Actions = RequestToAdd | RequestToEdit | RequestCommitEdit | RequestToRemove | RequestToToggle | RequestToReset

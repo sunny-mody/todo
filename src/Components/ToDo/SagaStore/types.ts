@@ -5,6 +5,7 @@ export interface Todo {
     active: boolean,
     title: string,
     description: string,
+    enableEdit: boolean,
 }
 
 export interface State {
@@ -15,6 +16,17 @@ export interface Add {
     type: constants.ADD
     todo: Todo
 }
+
+export interface Edit {
+    type: constants.EDIT
+    id: string
+}
+
+export interface Commit {
+    type: constants.COMMIT
+    todo: Todo
+}
+
 
 export interface Remove {
     type: constants.REMOVE
@@ -30,4 +42,4 @@ export interface Reset {
     type: constants.RESET
 }
 
-export type Actions = Add | Remove | Toggle | Reset
+export type Actions = Add | Edit | Commit | Remove | Toggle | Reset
