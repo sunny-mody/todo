@@ -3,7 +3,9 @@ import { Dispatch } from 'redux';
 import { useDispatch, useSelector } from 'react-redux';
 
 import clsx from 'clsx';
-import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
+// import styles
+import { useStyles } from './styles';
+
 import {
   IconButton,
   ListItem,
@@ -23,16 +25,8 @@ import { Actions } from '../SagaStore/todoTypes';
 
 import { AppState } from '../SagaStore/store';
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    activeTodo: {
-      textDecoration: 'line-through'
-    }
-  }),
-);
-
 const ToDoList: React.FC<any> = () => {
-  const classes = useStyles()
+  const classes = useStyles();
   const dispatch = useDispatch<Dispatch<Actions>>()
   const todos = useSelector<AppState, Array<Todo>>(state => state.todos)
 

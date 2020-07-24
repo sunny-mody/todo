@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import { Dispatch } from 'redux';
 import { useDispatch } from 'react-redux';
 
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+// import styles
+import { useStyles } from './styles';
+
 import { TextField, Grid, Button } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 
@@ -10,20 +12,6 @@ import { createTodo } from '../AddToDo/Helper/helper';
 
 import { requestToAdd } from '../SagaStore/todoActions';
 import { Actions } from '../SagaStore/todoTypes';
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      '& .MuiTextField-root': {
-        margin: theme.spacing(2),
-        width: '25ch',
-      },
-    },
-    button: {
-      margin: 20
-    },
-  }),
-);
 
 const Form: React.FC<any> = () => {
   const classes = useStyles();
