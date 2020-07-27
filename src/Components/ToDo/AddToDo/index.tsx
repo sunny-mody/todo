@@ -18,21 +18,21 @@ import { AppState } from '../SagaStore/store';
 
 const Form: React.FC<any> = () => {
   const classes = useStyles();
-
-  const todos = useSelector<AppState, Array<Todo>>(state => state.todos.filter(todo => todo.enableEdit));
+  // ToDo's enabled for editing
+  const editEnabledTodo = useSelector<AppState, Array<Todo>>(state => state.todos.filter(todo => todo.enableEdit));
 
   const dispatch = useDispatch<Dispatch<Actions>>()
 
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
 
-  const isEditRequested = (todos && todos.length > 0) || '';
+  const isEditRequested = (editEnabledTodo && editEnabledTodo.length > 0) || '';
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     let todo;
     if (isEditRequested) {
-      const { id, active } = todos[0];
+      const { id, active } = editEnabledTodo[0];
       todo = editTodo(id, active, title, description);
       dispatch(requestCommitEdit(todo));
     } else {
@@ -51,7 +51,7 @@ const Form: React.FC<any> = () => {
           <TextField
             name="todo"
             label="Add title"
-            value={title || (isEditRequested && todos[0].title)}
+            value={title || (isEditRequested && editEnabledTodo[0].title)}
             onChange={e => setTitle(e.target.value)}
             margin="normal"
             required
@@ -62,7 +62,7 @@ const Form: React.FC<any> = () => {
           <TextField
             name="description"
             label="Add Description"
-            value={description || (isEditRequested && todos[0].description)}
+            value={description || (isEditRequested && editEnabledTodo[0].description)}
             onChange={e => setDescription(e.target.value)}
             margin="normal"
             fullWidth
