@@ -16,7 +16,7 @@ import { Actions } from '../SagaStore/todoTypes';
 import { Todo } from '../SagaStore/types';
 import { AppState } from '../SagaStore/store';
 
-const Form: React.FC<any> = () => {
+const AddEditToDo: React.FC<any> = () => {
   const classes = useStyles();
   // ToDo's enabled for editing
   const editEnabledTodo = useSelector<AppState, Array<Todo>>(state => state.todos.filter(todo => todo.enableEdit));
@@ -85,4 +85,4 @@ const Form: React.FC<any> = () => {
   )
 }
 
-export default Form;
+export default AddEditToDo;
