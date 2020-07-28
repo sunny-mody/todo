@@ -16,11 +16,12 @@ import {
   Divider,
 } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Edit';
 import MaterialUIList from '@material-ui/core/List';
 
 import { Todo } from '../SagaStore/types';
 
-import { requestToToggle, requestToRemove } from '../SagaStore/todoActions';
+import { requestToToggle, requestToRemove, requestToEdit } from '../SagaStore/todoActions';
 import { Actions } from '../SagaStore/todoTypes';
 
 import { AppState } from '../SagaStore/store';
@@ -57,9 +58,17 @@ const ToDoList: React.FC<any> = () => {
               </ListItemText>
               <ListItemSecondaryAction>
                 <IconButton
-                  onClick={() => dispatch(requestToRemove(todo.id))}
+                  onClick={() => dispatch(requestToEdit(todo.id))}
                   edge="end"
                   color="primary"
+                  size="small"
+                >
+                  <EditIcon />
+                </IconButton>
+                <IconButton
+                  onClick={() => dispatch(requestToRemove(todo.id))}
+                  edge="end"
+                  color="secondary"
                   size="small"
                 >
                   <DeleteIcon />

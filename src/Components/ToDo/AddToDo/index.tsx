@@ -1,30 +1,45 @@
 import React, { useState } from 'react';
 import { Dispatch } from 'redux';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 // import styles
 import { useStyles } from './styles';
 
+// Material import
 import { TextField, Grid, Button } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 
-import { createTodo } from '../AddToDo/Helper/helper';
-
-import { requestToAdd } from '../SagaStore/todoActions';
+// saga imports
+import { createTodo, editTodo } from '../AddToDo/Helper/helper';
+import { requestToAdd, requestCommitEdit } from '../SagaStore/todoActions';
 import { Actions } from '../SagaStore/todoTypes';
+import { Todo } from '../SagaStore/types';
+import { AppState } from '../SagaStore/store';
 
-const Form: React.FC<any> = () => {
+const AddEditToDo: React.FC<any> = () => {
   const classes = useStyles();
+  // ToDo's enabled for editing
+  const editEnabledTodo = useSelector<AppState, Array<Todo>>(state => state.todos.filter(todo => todo.enableEdit));
+
   const dispatch = useDispatch<Dispatch<Actions>>()
 
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
 
+  const isEditRequested = (editEnabledTodo && editEnabledTodo.length > 0) || '';
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    const todo = createTodo('saga_todo_', title, description)
+    let todo;
+    if (isEditRequested) {
+      const { id, active } = editEnabledTodo[0];
+      todo = editTodo(id, active, title, description);
+      dispatch(requestCommitEdit(todo));
+    } else {
+      todo = createTodo('saga_todo_', title, description, false);
+      dispatch(requestToAdd(todo));
+    }
 
-    dispatch(requestToAdd(todo))
     setTitle('');
     setDescription('');
   }
@@ -36,7 +51,7 @@ const Form: React.FC<any> = () => {
           <TextField
             name="todo"
             label="Add title"
-            value={title}
+            value={title || (isEditRequested && editEnabledTodo[0].title)}
             onChange={e => setTitle(e.target.value)}
             margin="normal"
             required
@@ -47,7 +62,7 @@ const Form: React.FC<any> = () => {
           <TextField
             name="description"
             label="Add Description"
-            value={description}
+            value={description || (isEditRequested && editEnabledTodo[0].description)}
             onChange={e => setDescription(e.target.value)}
             margin="normal"
             fullWidth
@@ -62,7 +77,7 @@ const Form: React.FC<any> = () => {
             startIcon={<AddIcon />}
             className={classes.button}
           >
-            Add
+            {(isEditRequested && 'Edit') || 'Add'}
           </Button>
         </Grid>
       </Grid>
@@ -70,4 +85,4 @@ const Form: React.FC<any> = () => {
   )
 }
 
-export default Form;
+export default AddEditToDo;
