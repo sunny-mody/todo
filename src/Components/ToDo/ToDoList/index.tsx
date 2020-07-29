@@ -26,6 +26,9 @@ import { Actions } from '../SagaStore/todoTypes';
 
 import { AppState } from '../SagaStore/store';
 
+// Component import
+import { ToDoIndicator } from '../ToDoIndicator';
+
 const ToDoList: React.FC<any> = () => {
   const classes = useStyles();
   const dispatch = useDispatch<Dispatch<Actions>>()
@@ -33,6 +36,7 @@ const ToDoList: React.FC<any> = () => {
 
   return (
     <MaterialUIList disablePadding>
+      <ToDoIndicator length={todos.length} />
       {todos.map(todo => {
         return (
           <React.Fragment>
