@@ -9,7 +9,8 @@ export interface Todo {
 }
 
 export interface State {
-    todos: Array<Todo>
+    todos: Array<Todo>;
+    filter?: String;
 }
 
 export interface Add {
@@ -36,6 +37,11 @@ export interface Remove {
 export interface Toggle {
     type: constants.TOGGLE
     id: string
+}
+
+export interface Filter {
+    type: constants.FILTER
+    filter: string
 }
 
 export interface Reset {

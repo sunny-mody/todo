@@ -1,9 +1,9 @@
 import { put, takeEvery, all, fork } from 'redux-saga/effects';
 
-import { add, edit, commit, remove, toggle, reset } from './actions';
+import { add, edit, commit, remove, filer, toggle, reset } from './actions';
 
-import { REQUEST_TO_ADD, REQUEST_TO_EDIT, REQUEST_COMMIT_EDIT, REQUEST_TO_REMOVE, REQUEST_TO_TOGGLE, REQUEST_TO_RESET } from './todoConstants';
-import { RequestToAdd, RequestToEdit, RequestCommitEdit, RequestToRemove, RequestToToggle, RequestToReset } from './todoTypes';
+import { REQUEST_TO_ADD, REQUEST_TO_EDIT, REQUEST_APPLY_FILTER, REQUEST_COMMIT_EDIT, REQUEST_TO_REMOVE, REQUEST_TO_TOGGLE, REQUEST_TO_RESET } from './todoConstants';
+import { RequestToAdd, RequestToEdit, RequestApplyFilter, RequestCommitEdit, RequestToRemove, RequestToToggle, RequestToReset } from './todoTypes';
 
 function* requestAddTodo(data: RequestToAdd) {
     try {
@@ -45,6 +45,14 @@ function* requestToggleTodo(data: RequestToToggle) {
     }
 }
 
+function* requestApplyFilter(data: RequestApplyFilter) {
+    try {
+        yield put(filer(data.filter))
+    } catch(e) {
+        console.error(e.message)
+    }
+}
+
 function* requestReset(data: RequestToReset) {
     try {
         yield put(reset())
@@ -73,6 +81,10 @@ function* watchToggleTodo() {
     yield takeEvery(REQUEST_TO_TOGGLE, requestToggleTodo);
 }
 
+function* watchApplyFilter() {
+    yield takeEvery(REQUEST_APPLY_FILTER, requestApplyFilter);
+}
+
 function* watchReset() {
     yield takeEvery(REQUEST_TO_RESET, requestReset);
 }
@@ -84,6 +96,7 @@ const rootSaga = function* root() {
         fork(watchCommitTodo),
         fork(watchRemoveTodo),
         fork(watchToggleTodo),
+        fork(watchApplyFilter),
         fork(watchReset)
     ])
 }

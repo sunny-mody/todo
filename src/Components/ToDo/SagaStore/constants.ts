@@ -16,3 +16,6 @@ export type TOGGLE = typeof TOGGLE
 
 export const RESET = "RESET"
 export type RESET = typeof RESET
+
+export const FILTER = "FILTER"
+export type FILTER = typeof FILTER

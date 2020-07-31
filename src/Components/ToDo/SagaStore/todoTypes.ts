@@ -9,7 +9,8 @@ import { Todo } from './types';
 // }
 
 export interface State {
-  todos: Array<Todo>
+  todos: Array<Todo>;
+  filter?: string;
 }
 
 export interface RequestToAdd {
@@ -41,4 +42,9 @@ export interface RequestToReset {
   type: constants.REQUEST_TO_RESET
 }
 
-export type Actions = RequestToAdd | RequestToEdit | RequestCommitEdit | RequestToRemove | RequestToToggle | RequestToReset
+export interface RequestApplyFilter {
+  type: constants.REQUEST_APPLY_FILTER,
+  filter: string,
+}
+
+export type Actions = RequestToAdd | RequestToEdit | RequestCommitEdit | RequestToRemove | RequestToToggle | RequestToReset | RequestApplyFilter

@@ -23,13 +23,18 @@ import { Todo } from '../SagaStore/types';
 
 import { requestToToggle, requestToRemove, requestToEdit } from '../SagaStore/todoActions';
 import { Actions } from '../SagaStore/todoTypes';
+import { getToDoByFilter } from '../SagaStore/selector';
 
 import { AppState } from '../SagaStore/store';
 
 const ToDoList: React.FC<any> = () => {
   const classes = useStyles();
-  const dispatch = useDispatch<Dispatch<Actions>>()
-  const todos = useSelector<AppState, Array<Todo>>(state => state.todos)
+
+  const dispatch = useDispatch<Dispatch<Actions>>();
+
+  const filter = useSelector<AppState, any>(state => state.filter)
+  debugger;
+  const todos = useSelector<AppState, Array<Todo>>(state => getToDoByFilter(state, filter));
 
   return (
     <MaterialUIList disablePadding>
