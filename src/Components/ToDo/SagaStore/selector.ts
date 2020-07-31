@@ -2,7 +2,6 @@ import * as VISIBILITY_FILTERS from './todoConstants';
 import { AppState } from '../SagaStore/store';
 
 export const getToDoByFilter = (state: AppState, filter: string) => {
-  debugger;
   const allTodos = state.todos;
   switch (filter) {
     case VISIBILITY_FILTERS.ACTIVE:
