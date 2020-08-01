@@ -17,3 +17,15 @@ export type REQUEST_TO_TOGGLE = typeof REQUEST_TO_TOGGLE
 
 export const REQUEST_TO_RESET = "REQUEST_TO_RESET"
 export type REQUEST_TO_RESET = typeof REQUEST_TO_RESET
+
+export const REQUEST_APPLY_FILTER = "REQUEST_APPLY_FILTER"
+export type REQUEST_APPLY_FILTER = typeof REQUEST_APPLY_FILTER
+
+export const ALL = "ALL"
+export type ALL = typeof ALL
+
+export const ACTIVE = "ACTIVE"
+export type ACTIVE = typeof ACTIVE
+
+export const INACTIVE = "INACTIVE"
+export type INACTIVE = typeof INACTIVE
